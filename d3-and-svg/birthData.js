@@ -1,4 +1,4 @@
-var birthData = [
+export const birthData = [
   {
     'year': 1967,
     'month': 'January',
