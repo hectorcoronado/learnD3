@@ -2,3 +2,12 @@ svg {
   margin: 0 auto;
   display: block;
 }
+
+text {
+  font-family: monospace;
+}
+
+.tick line {
+  stroke: magenta;
+  stroke-dasharray: 1, 2;
+}

@@ -4,7 +4,7 @@ console.log(d3)
 
 let height = 700
 let width = 1000
-let padding = 15 // TODO: check padding
+let padding = 40 // TODO: check padding
 
 // yScale relates to subscribersPer100
 let yScale = d3.scaleLinear()
@@ -36,15 +36,15 @@ let colorScale = d3.scaleLinear()
                       regionData,
                       d => d.extremePovertyRate
                     ))
-                    .range(['lightcyan', 'navy'])
+                    .range(['lightcyan', 'indigo'])
 
 // radiusScale relates to growthRate
 let radiusScale = d3.scaleLinear()
                     .domain(d3.extent(
                       regionData,
-                      d => d.growthRate
+                      d => d.subscribersPer100
                     ))
-                    .range([1, 15])
+                    .range([1, 25])
 
 d3.select('svg')
   .append('g')
@@ -72,4 +72,33 @@ d3.select('svg')
     .attr('cx', d => xScale(d.adultLiteracyRate))
     .attr('cy', d => yScale(d.subscribersPer100))
     .attr('fill', d => colorScale(d.extremePovertyRate))
-    .attr('r', d => radiusScale(d.growthRate))
+    .attr('r', d => radiusScale(d.subscribersPer100))
+
+// svg label:
+d3.select('svg')
+  .append('text')
+    .attr('x', width / 2) // center the text
+    .attr('y', padding)
+    .style('text-anchor', 'middle')
+    .style('font-size', '1.5em')
+    .text("data on regions' literacy/cell subscribers")
+
+// y-axis label:
+d3.select('svg')
+  .append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -height / 2)
+    .attr('y', padding - 28)
+    // dy indicates shift along y-axis on pos of el or its content
+    .attr('dy', '1-1em')
+    .style('text-anchor', 'middle')
+    .text('cellular subscribers per 100')
+
+// x-axis label:
+d3.select('svg')
+  .append('text')
+    .attr('x', width / 2)
+    .attr('y', height - padding + 5)
+    .attr('dy', '1.5em')
+    .style('text-anchor', 'middle')
+    .text('adult literacy rate')
