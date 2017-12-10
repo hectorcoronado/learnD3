@@ -4,7 +4,7 @@ console.log(d3)
 
 let height = 700
 let width = 1000
-let padding = 40 // TODO: check padding
+let padding = 40
 
 // yScale relates to subscribersPer100
 let yScale = d3.scaleLinear()
