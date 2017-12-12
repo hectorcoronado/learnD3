@@ -1,0 +1,16 @@
+html {
+  background-color: palegoldenrod;
+}
+
+svg, input {
+  margin: 0 auto;
+  display: block;
+}
+
+text, .bin-count {
+  font-family: monospace;
+}
+
+.bin-count {
+  text-align: center;
+}
