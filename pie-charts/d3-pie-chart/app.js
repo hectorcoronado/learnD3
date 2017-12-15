@@ -44,12 +44,24 @@ const makeGraph = (year) => {
   let yearData = birthData.filter(d => d.year === year)
   let arcs = d3.pie()
                 .value(d => d.births)
-                // pie() returns a fn, so you can pass an argument to it:
+                .sort((a, b) => {
+                  // group by continents first:
+                  if (a.continent < b.continent) return -1
+                  else if (a.continent > b.continent) return 1
+                  // then by no. of births:
+                  else return a.births - b.births
+                })
+                // pie generator returns fn, so you can pass it an arg:
                 (yearData)
 
   let path = d3.arc()
                 .outerRadius(width / 2 - 10)
                 .innerRadius(width / 4)
+                // make it look cool:
+                // padAngle separates each wedge:
+                .padAngle(0.02)
+                // cornerRadius rounds corners:
+                .cornerRadius(20)
 
   // get update selection and store in variable:
   let update = d3.select('.chart')
